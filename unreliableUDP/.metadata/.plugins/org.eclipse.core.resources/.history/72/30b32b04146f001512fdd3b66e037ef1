@@ -1,0 +1,28 @@
+/*
+ * stacklist.h
+ *
+ *  Created on: Oct 10, 2015
+ *      Author: thanos
+ */
+
+#ifndef STACKLIST_H_
+#define STACKLIST_H_
+
+class stack_list
+{
+	struct node
+	{
+		int info;
+	    struct node *link;
+	}*top;
+	public:
+	node *push(node *, int);
+	node *pop(node *);
+	void traverse(node *);
+	stack_list()
+	{
+		top = NULL;
+	}
+};
+
+#endif /* STACKLIST_H_ */

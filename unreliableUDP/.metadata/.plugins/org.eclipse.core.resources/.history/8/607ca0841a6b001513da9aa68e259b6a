@@ -1,0 +1,24 @@
+/*
+ * bindserver.h
+ *
+ *  Created on: Oct 5, 2015
+ *      Author: thanos
+ */
+
+#ifndef BINDSERVER_H_
+#define BINDSERVER_H_
+#include "openandsegment.h"
+#include <sys/socket.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <string.h>
+#include <unistd.h>
+
+class bindserver {
+public:
+size_t get_flength(int fd);
+};
+
+#endif /* BINDSERVER_H_ */

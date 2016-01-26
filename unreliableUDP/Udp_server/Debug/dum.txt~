@@ -1,0 +1,26 @@
+wyers  sphere  murmur  elegant  honourable  stopping  guilt  welfare  avoided  fishing  perish  sober  steal  delicious  infant  lip  norman  offended  dost  memories  wheat  japanese  humor  exhibited  encounter  footsteps  marquis  smiles  amiable  twilight  arrows  consisting  park  retire  economy  sufferings  secrets  na  halted  govern  favourable  colors  translated  stretch  formation  immortal  gallery  parallel  lean  tempted  frontier  continent  knock  impatience  unity  dealing  prohibition  decent  fiery  images  tie  
+
+ 
+
+punished  submitted  julia  albert  rejoined  speedily  consented  major  preliminary  cell  void  placing  prudence  egg  amazement  border  artificial  hereafter  fanny  crimes  breathe  exempt  anchor  chicago  sits  purchased  eminent  neighbors  glowing  sunlight  examples  exercised  wealthy  seeming  bonaparte  shouting  thanked  illustrious  curiously  inspiration  seeds  naval  foes  everyone  longed  abundant  doubted  painter  greeted  erect  glasses  meanwhile  shooting  athens  wagon  lend  lent  crisis  undertake  particulars  eh  veins  polite  anna  experiences  seal  header  clergy  mount  array  corners  magazine  loudly  bitterness  texas  guardian  searching  rejected  harsh  includes  boldly  maurice  kate  lunch  pine  shells  seconds  despite  hoping  injustice  expressions  flies  push  tight  problems  landscape  sue  protested  scarlet  abandon  
+
+
+ 
+
+artistic  mainly  measured  loyal  boiling  desirous  suited  alliance  advise  waist  sinking  apprehension  stable  gregory  maximum  commit  hideous  hamilton  sweetness  dismissed  tore  affect  shaken  evils  unworthy  significance  modified  miracle  lieu  peasant  considerably  observing  conveyed  resemblance  extend  riches  personally  morality  rebellion  thread  dumb  inclination  forbidden  copper  differences  sailor  requested  alfred  response  promoting  imperial  blank  purity  victor  bending  solemnly  twenty four  minor  del  crimson  republic  teachers  ma'am  danced  bargain  dealt  fatigue  telephone  cents  whip  adams  dislike  witnessed  infantry  acres  checked  countrymen  enemy's  companies  normal  shirt  addresses  introduce  sofa  mothers  sweep  conversion  sketch  african  deserved  answering  virtuous  persian  anyway  thief  driver  retain  constructed  daniel  ut  
+
+ 
+
+philadelphia  conspicuous  channel  nobility  edith  berlin  editing  cambridge  declaration  guards  personality  smallest  excess  separation  disgust  ha  accomplish  speeches  herbert  convent  rightly  suspended  reform  mob  thirst  unnecessary  treasures  asks  viewed  designs  gleam  threatening  palm  missouri  filling  quoth  fur  fortnight  holes  addressing  frightful  encourage  speaker  tribute  procure  frankly  recommended  relieve  intentions  unjust  legislation  project  threshold  merits  morrow  traces  induce  spear  inward  pupils  corresponding 
+def g():
+  global big
+  big = file('big.txt').read()
+  N = len(big)
+  s = set()
+  for i in xrange(6, N):
+    c = big[i]
+    if ord(c) > 127 and c not in s:
+        print i, c, ord(c), big[max(0, i-10):min(N, i+10)]
+        s.add(c)
+  print s
+  print [ord(c) for c in s]

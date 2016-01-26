@@ -1,0 +1,132 @@
+class FileAccess {
+public:
+	string filename;
+	int parts, filesize;
+
+	void readFile(string name) {
+
+		filename = name;
+
+		streampos begin, end;
+		ifstream file(name.c_str(), ios::binary);
+		begin = file.tellg();
+		file.seekg(0, ios::end);
+		end = file.tellg();
+
+		filesize = end - begin;
+		cout << "Filesize:   " << filesize << endl;
+		if (filesize < MSS)
+			parts = 1;
+		else {
+
+			if ((filesize / MSS) != 0)
+				parts = filesize / MSS + 1;
+			else
+				parts = filesize / MSS;
+
+		}
+
+	}
+
+	string splitFile(int start, int end) {
+
+		ifstream file(filename.c_str(), ios::in);
+		file.seekg(0, ios::beg);
+		string temp = "";
+
+		int i = 0;
+		char c;
+		if (end > filesize)
+			end = filesize - 1;
+		if (start == 0) {
+			while (i <= end) {
+
+				file.get(c);
+				temp += c;
+				i++;
+			}
+			return temp;
+
+		} else {
+			i = 0;
+			while (i < start) {
+				file.get(c);
+				i++;
+			}
+
+			while (i <= end) {
+
+				file.get(c);
+				temp += c;
+				i++;
+			}
+
+			return temp;
+
+		}
+	}
+
+	void segmentCalls(sockaddr_in c, int len, int s, int windowsize) {
+
+		struct header client_c = header();
+		int count = 0;
+		int start = 0;
+		int end = MSS - 1;
+		char segments[50];
+
+		socklen_t slen = sizeof(struct sockaddr_in);
+
+		int seq;
+		while (count < parts) {
+			map<int, header> ackTrack;
+			int flag = 0;
+			int j = 0;
+			while (j < windowsize) {
+
+				client_c = header();
+
+				seq = start + 1;
+
+				string buffer = splitFile(start, end);
+
+				if (count + 1 == parts)
+					client_c.setValues(seq, 0, 0, 1, buffer);
+				else
+					client_c.setValues(seq, 0, 0, 0, buffer);
+
+				cout << "Sent packet with sequence number:  " << seq
+						<< "  Part: " << count + 1 << endl;
+				sendto(s, &client_c, sizeof(header), 0, (struct sockaddr *) &c,
+						len);
+				ackTrack[seq]=client_c;
+				start = end + 1;
+				end = end + MSS;
+				count++;
+				if (count == parts) {
+					flag = 1;
+					break;
+				}
+
+				j++;
+			}
+			int count=0;
+			while (!ackTrack.empty()) {
+				if(count==4)
+					break;
+				if (recvfrom(s, &client_c, sizeof(header), 0,(struct sockaddr*) &c, &slen)<0)
+				 {
+						cerr << "ERROR IN RECIEVING: " << strerror( errno ) << endl;
+						exit( EXIT_FAILURE );
+				 }
+
+				cout << "Ack number :" << client_c.ack_no<< endl;
+				ackTrack.erase(client_c.seq_no);
+				count++;
+			}
+
+		}
+
+	}
+
+};
+

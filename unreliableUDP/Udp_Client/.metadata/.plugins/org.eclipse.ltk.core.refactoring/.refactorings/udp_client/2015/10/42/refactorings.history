@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;udp_client/udp_client.cpp&apos; to &apos;udp_client.c&apos;" description="Rename resource &apos;udp_client.cpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="udp_client.cpp" name="udp_client.c" stamp="1444971758149" updateReferences="true"/>
+</session>

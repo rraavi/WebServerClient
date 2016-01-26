@@ -1,0 +1,42 @@
+16:20:31 **** Build of configuration Debug for project Client ****
+make all 
+Building file: ../UdpClient.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"UdpClient.d" -MT"UdpClient.d" -o "UdpClient.o" "../UdpClient.cpp"
+../UdpClient.cpp: In function ‘void threeDuplicateAcks(sockaddr_in, int, int, int)’:
+../UdpClient.cpp:63:18: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+    err("sendto()");
+                  ^
+../UdpClient.cpp: In constructor ‘Server::Server(char*, int)’:
+../UdpClient.cpp:86:16: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+    err("socket");
+                ^
+../UdpClient.cpp: In member function ‘void Server::start(std::string, int)’:
+../UdpClient.cpp:105:18: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+    err("sendto()");
+                  ^
+../UdpClient.cpp:125:22: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+      err("recvfrom()");
+                      ^
+../UdpClient.cpp:156:21: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+       err("sendto()");
+                     ^
+../UdpClient.cpp:180:20: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+      err("sendto()");
+                    ^
+../UdpClient.cpp:106:8: warning: unused variable ‘buf’ [-Wunused-variable]
+   char buf[sizeof(header)];
+        ^
+../UdpClient.cpp:113:8: warning: unused variable ‘outOforderclient_c’ [-Wunused-variable]
+   bool outOforderclient_c = false;
+        ^
+Finished building: ../UdpClient.cpp
+ 
+Building target: Client
+Invoking: GCC C++ Linker
+g++  -o "Client"  ./UdpClient.o   
+Finished building target: Client
+ 
+
+16:20:32 Build Finished (took 1s.322ms)
+

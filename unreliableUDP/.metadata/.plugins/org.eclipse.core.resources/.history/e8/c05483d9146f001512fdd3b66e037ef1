@@ -1,0 +1,19 @@
+
+
+#ifndef UDPWINDOW_H_
+#define UDPWINDOW_H_
+
+
+class UdpWindow
+{
+public:
+
+
+	class stack_list
+	{
+
+	};
+
+};
+
+#endif /* UDPWINDOW_H_ */

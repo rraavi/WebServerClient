@@ -1,0 +1,29 @@
+/*
+ * openandsegment.h
+ *
+ *  Created on: Oct 4, 2015
+ *      Author: thanos
+ */
+
+#ifndef OPENANDSEGMENT_H_
+#define OPENANDSEGMENT_H_
+#include "header.h"
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <string.h>
+
+class openandsegment
+{
+public:
+		void readFile(string name);
+		string splitFile(int start, int end);
+		void readandsend(sockaddr_in c, int len, int s, int windowsize);
+};
+#endif /* OPENANDSEGMENT_H_ */

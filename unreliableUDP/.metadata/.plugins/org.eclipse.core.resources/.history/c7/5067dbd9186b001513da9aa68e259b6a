@@ -1,0 +1,18 @@
+/*
+ * bindserver.cpp
+ *
+ *  Created on: Oct 5, 2015
+ *      Author: thanos
+ */
+
+#include "bindserver.h"
+
+bindserver::bindserver() {
+	// TODO Auto-generated constructor stub
+
+}
+
+bindserver::~bindserver() {
+	// TODO Auto-generated destructor stub
+}
+

@@ -1,0 +1,14 @@
+/*
+ * UdpWindow.h
+ *
+ *  Created on: Oct 10, 2015
+ *      Author: thanos
+ */
+
+#ifndef UDPWINDOW_H_
+#define UDPWINDOW_H_
+
+class UdpWindow {
+};
+
+#endif /* UDPWINDOW_H_ */

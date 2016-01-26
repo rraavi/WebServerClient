@@ -1,0 +1,22 @@
+/*
+ * openandsegment.h
+ *
+ *  Created on: Oct 4, 2015
+ *      Author: thanos
+ */
+
+#ifndef OPENANDSEGMENT_H_
+#define OPENANDSEGMENT_H_
+#import "header.h"
+#include <stdio.h>
+#include <errno.h>
+#include <fstream>
+#include <iostream>
+
+class openandsegment
+{
+public:
+	int openandsegment(int sock, int fd, char buff[MAXSIZE]);
+	int readandsend(int i_byte, int f_byte, char buffer[MSS], int sock);
+};
+#endif /* OPENANDSEGMENT_H_ */

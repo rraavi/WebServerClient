@@ -1,0 +1,70 @@
+/*
+ * UdpServer.cpp
+ *
+ *  Created on: Oct 4, 2015
+ *      Author: thanos
+ */
+
+
+#include "openandsegment.h"
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <string.h>
+#include <unistd.h>
+#include <errno.h>
+
+
+int main(int argc, char *argv[])
+{
+	cout<<"Starting the server..."<<endl;
+	int sock,fd;
+	struct sockaddr_in server, client;
+	socklen_t addr_size;
+	char buff[MAXSIZE], buffer1[MSS];
+	char *filename;
+	/*
+	 * creating a streaming socket and check
+	 */
+	if((sock = socket(PF_INET, SOCK_DGRAM, 0))< 0)
+	{
+		cerr << "ERROR IN SOCKET: " << strerror( errno ) <<endl;
+		exit( EXIT_FAILURE );
+	}
+	cout<<"Socket opened and created..."<<endl;
+	/*
+	 * build address/port structure
+	 */
+	 server.sin_family = AF_INET;
+	 server.sin_port = htons(atoi(argv[1]));
+	 server.sin_addr.s_addr = INADDR_ANY;
+	 addr_size = sizeof(struct sockaddr);
+	 /*
+	  * bind the socket to a port address
+	  */
+	 if ((bind(sock, (struct sockaddr*)&server, addr_size))<0)
+	 {
+			cerr << "ERROR IN BINDING: " << strerror( errno ) << endl;
+			exit( EXIT_FAILURE );
+	 }
+	 cout<<" Server binding done..."<<endl;
+	 /*
+	  * receive the details from client
+	  */
+	 if((recvfrom(sock, buffer1, sizeof(buffer1), 0, (struct sockaddr*)&client, &addr_size))<0)
+	 {
+			cerr << "ERROR IN RECEIVING: " << strerror( errno ) << endl;
+			exit( EXIT_FAILURE );
+	 }
+	 /*
+	  * parse the details from request header
+	  */
+	 filename=buffer1;
+	 cout<<"**The filename is: \n"<<filename<<endl;
+	 openandsegment obj;
+	 obj.openandsegment1(sock,fd,filename);
+
+	 return 0;
+	 close(sock);
+}

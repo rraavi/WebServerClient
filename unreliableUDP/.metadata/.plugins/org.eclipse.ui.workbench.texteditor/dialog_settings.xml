@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="293" key="DIALOG_WIDTH"/>
+		<item value="177" key="DIALOG_Y_ORIGIN"/>
+		<item value="462" key="DIALOG_HEIGHT"/>
+		<item value="893" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Cantarell|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="setValues" key="selection"/>
+		<list key="findhistory">
+			<item value="ackTrack"/>
+			<item value="setValues"/>
+			<item value="set_values"/>
+			<item value="setvalues"/>
+			<item value="setinit_values"/>
+			<item value="get_flength"/>
+			<item value="UDPPlus"/>
+			<item value="PACKET"/>
+		</list>
+		<list key="replacehistory">
+			<item value="ack.setValues"/>
+			<item value="header."/>
+			<item value="setValues"/>
+			<item value="header"/>
+			<item value="client_c"/>
+			<item value="MSS"/>
+			<item value="length"/>
+			<item value="file"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="248" key="DIALOG_Y_ORIGIN"/>
+		<item value="408" key="DIALOG_X_ORIGIN"/>
+	</section>
+</section>

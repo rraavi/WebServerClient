@@ -1,0 +1,17 @@
+/*
+ * bindserver.h
+ *
+ *  Created on: Oct 5, 2015
+ *      Author: thanos
+ */
+
+#ifndef BINDSERVER_H_
+#define BINDSERVER_H_
+
+class bindserver {
+public:
+	bindserver();
+	virtual ~bindserver();
+};
+
+#endif /* BINDSERVER_H_ */

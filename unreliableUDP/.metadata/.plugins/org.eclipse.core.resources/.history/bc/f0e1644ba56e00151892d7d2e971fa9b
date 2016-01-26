@@ -1,0 +1,126 @@
+/*
+ * openandsegment.cpp
+ *
+ *  Created on: Oct 4, 2015
+ *      Author: thanos
+ */
+
+#include "openandsegment.h"
+#include <cstring>
+
+/*
+ * set at the beginning of your file
+ * lseek() returns number of byte measured
+ * set again at the beginning of the file
+ */
+size_t  get_flength(int fd)
+{
+        size_t  len;
+        lseek(fd, 0, SEEK_SET);
+        len = lseek(fd, 0, SEEK_END);
+        lseek(fd, 0, SEEK_SET);
+        return len;
+}
+
+int openandsegment::openandsegment1(int sock,struct header client_c, int wndw_sz, struct sockaddr_in client, socklen_t addr_size)
+{
+	int fd;
+	FILE *fp;
+	char buff[MAXSIZE];
+//	char buffer1[MSS];
+	size_t file_len, size_to_send;
+	if((fp=fopen(client_c.data,"r"))<0)
+	{
+		cerr << "CANNOT OPEN FILE: " << strerror( errno ) << endl;
+		exit( EXIT_FAILURE );
+	}
+	fd = open(client_c.data, O_RDONLY);
+	file_len = get_flength(fd);
+	cout<<"...Number of Bytes are:"<<file_len<<"..."<<endl;
+//	addr_size = sizeof(struct sockaddr);
+//	cout<<"HI"<<endl;
+	if((sendto(sock, &file_len, sizeof(file_len), 0, (struct sockaddr*)&client, addr_size))<0)
+    {
+		cerr << "CANNOT SEND 1: " << strerror( errno ) << endl;
+		exit( EXIT_FAILURE );
+    }
+	if(file_len<=MSS)
+	{
+		read(fd, buff, sizeof(buff));
+		strcpy(client_c.data,buff);
+		client_c.length=file_len;
+//		addr_size = sizeof(struct sockaddr);
+		client_c.seq_no = client_c.seq_no + 1;
+		if((size_to_send = sendto(sock, &client_c, sizeof(header), 0, (struct sockaddr*)&client, addr_size))<0)
+		{
+			cerr << "CANNOT SEND 2: " << strerror( errno ) << endl;
+			exit( EXIT_FAILURE );
+		}
+		cout<<"...Details Sent With seq_no:"<<client_c.seq_no<<"..."<<endl;
+		//
+		if((recvfrom(sock, &client_c, sizeof(header), 0, (struct sockaddr*)&client, &addr_size))<0)
+		{
+			cerr << "CANNOT RECIEVE 1: " << strerror( errno ) << endl;
+			exit( EXIT_FAILURE );
+	    }
+	//client_c.seq_no = server_s.ack_no ;
+		cout<<"...Ack Received:"<<client_c.ack_no<<"..."<<endl;
+   	}
+	else
+	{
+		int segments = ((file_len/MSS)+1);
+		int i_byte=0, f_byte=0;
+		read(fd, buff, sizeof(buff));
+		for(int i=0;i<segments;i++)
+		{
+			i_byte=f_byte;
+			if(i==segments-1)
+			{
+				f_byte=file_len;
+				readandsend(i_byte,f_byte,buff,sock,fp, client, addr_size);
+
+			//readFileAndSend(initialSeqNo+startByte,true,startByte,endByte);
+			}
+			else
+			{
+				f_byte=f_byte+MSS;
+				readandsend(i_byte,f_byte,buff,sock,fp,client, addr_size);
+
+			//readFileAndSend(initialSeqNo+startByte,false,startByte,endByte);
+			 }
+		//waitForAck(initialSeqNo+startByte,endByte);
+		 }
+	 }
+	return 0;
+}
+int openandsegment::readandsend( int i_byte, int f_byte, char *buffer, int sock, FILE *fp, struct sockaddr_in client, socklen_t addr_size)
+{
+
+	header client_c;
+//	client_c.seq_no = client_c.seq_no + 1;
+	memset(client_c.data,0,1640);
+	client_c.length=(f_byte-i_byte);
+	cout<<"...Initial Byte:"<<i_byte<<" "<<"Final Byte:"<<f_byte<<"..."<<endl;
+	cout<<"...Length of Data being Sent:"<<client_c.length<<"..."<<endl;
+	fseek(fp, i_byte, SEEK_SET);
+//	fread(buffer, i_byte, client_c.length, fp);
+//	bzero(client_c.data,1640);
+	cout<<client_c.data<<endl;
+	memcpy(client_c.data,fp,client_c.length);
+	cout<<"data 1"<<endl;
+	if(sendto(sock, &client_c, sizeof(client_c), 0, (struct sockaddr*)&client, addr_size)==-1)
+	{
+		cerr<<"ERROR"<<strerror(errno)<<endl;
+	}
+	cout<<"...Packet Sent..."<<endl;
+	cout<<client_c.data<<endl;
+//	cout<<"...Details Sent With seq_no:"<<client_c.ack_no<<"..."<<endl;
+	if((recvfrom(sock, &client_c, sizeof(header), 0, (struct sockaddr*)&client, &addr_size))<0)
+	{
+		cerr << "CANNOT RECIEVE 1: " << strerror( errno ) << endl;
+		exit( EXIT_FAILURE );
+	}
+	cout<<"...Ack Received:"<<client_c.seq_no<<"..."<<endl;
+//	bzero(buffer,sizeof(buffer));
+	return 0;
+}

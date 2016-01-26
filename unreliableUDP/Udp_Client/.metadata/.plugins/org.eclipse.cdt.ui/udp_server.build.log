@@ -1,0 +1,7 @@
+08:57:43 **** Incremental Build of configuration Default for project udp_server ****
+make all 
+cc    -c -o udp_server.o udp_server.c
+g++ -o udp_server udp_server.o 
+
+08:57:43 Build Finished (took 275ms)
+

@@ -1,0 +1,6 @@
+08:57:43 **** Incremental Build of configuration Default for project UdpClient ****
+make all 
+make: *** No rule to make target 'all'.  Stop.
+
+08:57:43 Build Finished (took 71ms)
+

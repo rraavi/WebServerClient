@@ -1,0 +1,101 @@
+/*
+ * Client.cpp
+ * Created on: Oct 2, 2015
+ * 	   Author: Raghu
+ */
+
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include "header.h"
+using namespace std;
+
+
+int main(int argc, char **argv)
+{
+	struct header c;
+	int pno, by_rv, n;
+	int sockfd;									//File Descriptor for our Socket
+	struct sockaddr_in s_addr;
+	socklen_t addrsize = sizeof(struct sockaddr);
+	char buffer_r[1500];
+	char buffer_s[1500];
+	char *filename;
+	size_t sztord = 0;
+	size_t szrd =0;
+	pno = atoi(argv[1]);
+	/*
+	 * checks for the number of arguments being passed
+	 */
+	if(argc<4)
+	{
+		cerr << "Usage: " << argv[ 0 ] << " address port filename" << endl;
+	    exit(EXIT_FAILURE);
+	}
+	/*
+	 * open a socket and check if it is opened properly
+	 */
+	if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+	{
+		cerr << "socket: " << strerror( errno ) << endl;
+		exit( EXIT_FAILURE );
+	}
+	/*
+	 * build address/port structure
+	 */
+    	s_addr.sin_family = AF_INET;
+    	s_addr.sin_port = htons(atoi(argv[2]));
+    	s_addr.sin_addr.s_addr = inet_addr(argv[1]);
+    	filename = argv[3];
+	bzero(buffer_s, 1500);
+	sprintf(buffer_s,"%s\r\n",filename);
+	/*
+	 * echo/send the details to the server
+	 */
+	n = sendto(sockfd, buffer_s, strlen(buffer_s), 0, (struct sockaddr*)&s_addr, addrsize);
+	cout<<"Details sent\n"<<endl;
+	if(n<0)
+	{
+		cerr << "ERROR WHILE READING SOCKET: " << strerror( errno ) << endl;
+		exit( EXIT_FAILURE );
+	}
+	if((recvfrom(sockfd, (size_t*)&sztord, sizeof(sztord), 0, (struct sockaddr*)&s_addr, &addrsize))<0)
+	{
+		cerr << "ERROR IN RECEIVING: " << strerror( errno ) << endl;
+		exit( EXIT_FAILURE );
+	}
+	cout<<"details received"<<endl;
+	/*
+	 * error checking for size_to_read
+	 */
+	if (sztord < 0)
+	{
+		cerr << "ERROR TO READ: " << strerror( errno ) << endl;
+		exit( EXIT_FAILURE );
+	}
+	/*
+	 * receive the data from the udp server
+	 */
+	if((szrd = recvfrom(sockfd, buffer_r, sizeof(buffer_r), 0, (struct sockaddr*)&s_addr, &addrsize))<0)
+	{
+		cerr << "ERROR WHILE RECEIVING: " << strerror( errno ) << endl;
+		exit( EXIT_FAILURE );
+	}
+    	cout<<"%s"<<buffer_r<<endl;
+    	/*
+     	* prints the number of bytes and the last byte sent
+     	*/
+	cout<<"The Last Byte has been Recieved\n Number of bytes: %lu\n"<<sztord<<endl;
+close(sockfd);
+return 0;
+}

@@ -1,0 +1,24 @@
+/*
+ * bindserver.cpp
+ *
+ *  Created on: Oct 5, 2015
+ *      Author: thanos
+ */
+
+#include "bindserver.h"
+
+
+/*
+ * set at the beginning of your file
+ * lseek() returns number of byte measured
+ * set again at the beginning of the file
+ */
+int bindserver::get_flength(int fd)
+{
+        size_t  len;
+        lseek(fd, 0, SEEK_SET);
+        len = lseek(fd, 0, SEEK_END);
+        lseek(fd, 0, SEEK_SET);
+        return len;
+};
+

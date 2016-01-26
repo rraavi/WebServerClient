@@ -1,0 +1,25 @@
+/*
+ * header.h
+ *
+ *  Created on: Oct 4, 2015
+ *      Author: thanos
+ */
+
+#ifndef HEADER_H_
+#define HEADER_H_
+
+const int MAXSIZE=20000;
+const int MSS=1640;
+using namespace std;
+
+struct header
+{
+	unsigned int seq_no;
+	unsigned int ack_no;
+	unsigned char ackflag;
+	unsigned char finflag;
+	unsigned short length;
+	char data[MSS];
+};
+
+#endif /* HEADER_H_ */
