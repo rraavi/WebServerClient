@@ -1,0 +1,203 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#define MAXSIZE 2000
+
+/*struct httpresponse
+{
+	char type[MAXSIZE];
+	char version[MAXSIZE];
+	char status[MAXSIZE];
+}r;*/
+char *filename;
+struct headerinfo
+{
+	char method[MAXSIZE];
+	char uri[MAXSIZE];
+	char version[MAXSIZE];
+	char conntype[MAXSIZE];
+}h;
+
+void error(char *msg)
+{
+	perror(msg);
+}
+
+int parseheader(char buffer1[])					//this function is used to parse the Http request header into the structure
+{
+	char *token;
+	char *t1;
+	token = strtok(buffer1,"\r\n");
+	while (token!=NULL)
+	{
+		if(strcmp(token,"GET"))
+			sscanf(buffer1, "%s %s %s", h.method, h.uri, h.version);
+		t1=strstr(token,"Connection");
+		if(t1 != NULL)
+			sscanf(t1, "Connection: %s", h.conntype);
+		token = strtok(NULL, "\r\n");
+	}
+	printf("request parsed \n");
+	return 0;
+}
+
+int httpresponse(char *filename, int newsockfd)
+{
+	FILE *fp;
+	char buf[1000]={0};
+	int sz;
+	int n;
+	char line1[MAXSIZE] = {0};
+	char line2[MAXSIZE] = {0};
+	char line3[MAXSIZE] = {0};
+	char line4[MAXSIZE] = {0};
+	char line5[MAXSIZE] = {0};
+	char finalline[MAXSIZE] = {0};
+	filename = h.uri+1;
+	fp = fopen(filename,"r");
+	fseek(fp, 0L, SEEK_END);
+	sz = ftell(fp);
+	fseek(fp, 0L, SEEK_SET);
+	fread(buf, 1, sz, fp);
+	if(strncmp(h.conntype, "keep-alive", strlen(h.conntype))==0)
+	{
+		printf("THE TYPE THAT IS BEING HANDLED IS FOR PERSISTENT CONNECTIONS");
+		if(fp!=NULL)
+		{
+			printf("HELLO1\n");
+			strcat(line1, "HTTP/1.1 200 OK\n");
+			strcat(line2, "Content-Type: text/html; charset=utf-8\n");
+			strcat(line3, "Connection: keep-alive\n");
+			strcat(line4, "Content-Length: 1000 \n\n");
+			strcat(line5, buf);
+			strcat(finalline, line1);
+			strcat(finalline, line2);
+			strcat(finalline, line3);
+			strcat(finalline, line4);
+			strcat(finalline, line5);
+			n = send(newsockfd, finalline, strlen(finalline), 0);
+			if(n<0)
+					perror("ERROR WRITING TO THE SOCKET");
+		}
+		else
+		{
+			strcat(line1, "HTTP/1.1 404 Not Found\n");
+			strcat(line2, "Content-Type: text/html; charset=utf-8\n Connection: close\n Content-Length: 1000 \n");
+			strcat(line3, "<html><title>FileNotFound</title>\n <body>\n 404, FileNotFound \n </body>\n </html>\n");
+			strcat(finalline, line1);
+			strcat(finalline, line2);
+			strcat(finalline, line3);
+			n = send(newsockfd, finalline, strlen(finalline), 0);
+			if(n<0)
+					perror("ERROR WRITING TO THE SOCKET");
+		}
+	}
+	else if(strncmp(h.conntype, "close", strlen(h.conntype))==0)
+	{
+		printf("THE TYPE THAT IS BEING HANDLED IS FOR NON-PERSISTENT CONNECTIONS");
+		if(fp!=NULL)
+		{
+			printf("HELLO2\n");
+			strcat(line1, "HTTP/1.0 200 OK\n");
+			strcat(line2, "Content-Type: text/html; charset=utf-8\n");
+			strcat(line3, "Connection: close\n");
+			strcat(line4, "Content-Length: 1000 \n\n");
+			strcat(line5, buf);
+			strcat(finalline, line1);
+			strcat(finalline, line2);
+			strcat(finalline, line3);
+			strcat(finalline, line4);
+			strcat(finalline, line5);
+			n = send(newsockfd, finalline, strlen(finalline), 0);
+			if(n<0)
+					perror("ERROR WRITING TO THE SOCKET");
+		}
+		else
+		{
+			strcat(line1, "HTTP/1.0 404 Not Found\n");
+			strcat(line2, "Content-Type: text/html; charset=utf-8\n Connection: close\n Content-Length: 1000 \n");
+			strcat(line3, "<html><title>FileNotFound</title>\n <body>\n 404, FileNotFound \n </body>\n </html>\n");
+			strcat(finalline, line1);
+			strcat(finalline, line2);
+			strcat(finalline, line3);
+			n = send(newsockfd, finalline, strlen(finalline), 0);
+			if(n<0)
+					perror("ERROR WRITING TO THE SOCKET");
+		}
+	}
+	return 0;
+}
+
+int main(int argc, char *argv[])
+{
+	int sockfd, newsockfd, pno, clen, n, flag, keep_alive=1;
+	char buffer[MAXSIZE]={0};
+	struct sockaddr_in s_addr, c_addr; //structure is defined in <netinet/in.h>
+	//FILE *fp;
+
+	if(argc<2)
+		perror("NO PORT ADDRESS GIVEN");
+
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	if(sockfd<0)
+		perror("ERROR OPENING SOCKET");
+	bzero((char*)&s_addr,sizeof(s_addr));
+	pno = atoi(argv[1]);
+	s_addr.sin_family = AF_INET;
+	s_addr.sin_port = htons(pno);
+	s_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+	if(bind(sockfd,(struct sockaddr *) &s_addr, sizeof(s_addr))<0)
+		perror("ERROR ON BINDING");
+	listen(sockfd,5);
+	clen = sizeof(c_addr);
+	newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+	if(newsockfd<0)
+		perror("ERROR ON ACCEPTING");
+	bzero(buffer,2000);
+	n = read(newsockfd,buffer,2000);
+	if(n<0)
+		perror("ERROR READING YOUR MESSAGE");
+	printf("The message is :\n%s\n",buffer);
+	parseheader(buffer);
+	//httpresponse(filename, newsockfd);
+	if(strncmp(h.conntype,"keep-alive", strlen(h.conntype))==0)
+		flag=1;
+	else
+		flag=0;
+
+	while(keep_alive)
+		{
+		puts("HELLO!");
+			httpresponse(filename, newsockfd);
+			puts("HELLO!");
+			bzero(buffer,2000);
+			n = read(newsockfd,buffer,2000);
+			puts("HELLO@");
+			parseheader(buffer);
+			puts("HELLO");
+			if(strncmp(h.conntype,"keep-alive", strlen(h.conntype))==0)
+			{
+				flag=1;
+			}
+			else
+				flag=0;
+			if(flag==0)
+			{
+				keep_alive=0;
+			}
+		}
+	if (flag==0)
+	{
+		httpresponse(filename, newsockfd);
+	}
+	close(sockfd);
+	close(newsockfd);
+return 0;
+}
+

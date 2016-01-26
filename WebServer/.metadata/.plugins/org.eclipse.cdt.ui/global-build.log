@@ -1,0 +1,791 @@
+17:33:51 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/Web_Server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Web_Server.d" -MT"src/Web_Server.d" -o "src/Web_Server.o" "../src/Web_Server.c"
+../src/Web_Server.c: In function ‘badrequest’:
+../src/Web_Server.c:60:7: warning: unused variable ‘line2’ [-Wunused-variable]
+  char line2[MAXSIZE] = {0};
+       ^
+../src/Web_Server.c: In function ‘main’:
+../src/Web_Server.c:187:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/Web_Server.c:6:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/Web_Server.c:203:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   if(h.method!="GET")
+              ^
+../src/Web_Server.c:205:4: error: too few arguments to function ‘badrequest’
+    badrequest();
+    ^
+../src/Web_Server.c:56:5: note: declared here
+ int badrequest(int newsockfd)
+     ^
+../src/Web_Server.c:160:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+src/subdir.mk:30: recipe for target 'src/Web_Server.o' failed
+make: *** [src/Web_Server.o] Error 1
+
+17:33:51 Build Finished (took 123ms)
+
+17:33:51 **** Incremental Build of configuration Release for project Web_Server ****
+make all 
+Building file: ../src/Client.c
+Invoking: GCC C Compiler
+gcc -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Client.d" -MT"src/Client.d" -o "src/Client.o" "../src/Client.c"
+../src/Client.c: In function ‘sendreq’:
+../src/Client.c:25:19: warning: unused variable ‘sz’ [-Wunused-variable]
+  int n, by_rv, i, sz;
+                   ^
+../src/Client.c:25:16: warning: unused variable ‘i’ [-Wunused-variable]
+  int n, by_rv, i, sz;
+                ^
+../src/Client.c: In function ‘main’:
+../src/Client.c:81:2: warning: implicit declaration of function ‘inet_addr’ [-Wimplicit-function-declaration]
+  s_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  ^
+../src/Client.c:58:19: warning: unused variable ‘n’ [-Wunused-variable]
+  int sockfd, pno, n;
+                   ^
+../src/Client.c:58:14: warning: variable ‘pno’ set but not used [-Wunused-but-set-variable]
+  int sockfd, pno, n;
+              ^
+Finished building: ../src/Client.c
+ 
+Building file: ../src/Web_Server.c
+Invoking: GCC C Compiler
+gcc -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Web_Server.d" -MT"src/Web_Server.d" -o "src/Web_Server.o" "../src/Web_Server.c"
+../src/Web_Server.c: In function ‘badrequest’:
+../src/Web_Server.c:60:7: warning: unused variable ‘line2’ [-Wunused-variable]
+  char line2[MAXSIZE] = {0};
+       ^
+../src/Web_Server.c: In function ‘main’:
+../src/Web_Server.c:187:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/Web_Server.c:6:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/Web_Server.c:203:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   if(h.method!="GET")
+              ^
+../src/Web_Server.c:205:4: error: too few arguments to function ‘badrequest’
+    badrequest();
+    ^
+../src/Web_Server.c:56:5: note: declared here
+src/subdir.mk:30: recipe for target 'src/Web_Server.o' failed
+ int badrequest(int newsockfd)
+     ^
+../src/Web_Server.c:160:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/Web_Server.c: In function ‘httpresponse’:
+../src/Web_Server.c:95:3: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result [-Wunused-result]
+   fread(buf, 1, sz, fp);
+   ^
+make: *** [src/Web_Server.o] Error 1
+21:22:28 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+make: *** No rule to make target '../src/Client.c', needed by 'src/Client.o'.  Stop.
+21:23:00 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/UDP_Server/udp_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/UDP_Server/udp_server.d" -MT"src/UDP_Server/udp_server.d" -o "src/UDP_Server/udp_server.o" "../src/UDP_Server/udp_server.c"
+../src/UDP_Server/udp_server.c: In function ‘main’:
+../src/UDP_Server/udp_server.c:54:8: warning: unused variable ‘t2’ [-Wunused-variable]
+  char *t2;
+        ^
+../src/UDP_Server/udp_server.c:46:12: warning: variable ‘portno’ set but not used [-Wunused-but-set-variable]
+  int sock, portno, fd;
+            ^
+Finished building: ../src/UDP_Server/udp_server.c
+ 
+Building file: ../src/UDP_Client/udp_client.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/UDP_Client/udp_client.d" -MT"src/UDP_Client/udp_client.d" -o "src/UDP_Client/udp_client.o" "../src/UDP_Client/udp_client.c"
+../src/UDP_Client/udp_client.c: In function ‘main’:
+../src/UDP_Client/udp_client.c:59:5: warning: implicit declaration of function ‘inet_addr’ [-Wimplicit-function-declaration]
+     s_addr.sin_addr.s_addr = inet_addr(argv[1]);
+     ^
+../src/UDP_Client/udp_client.c:28:11: warning: unused variable ‘by_rv’ [-Wunused-variable]
+  int pno, by_rv, n;
+           ^
+../src/UDP_Client/udp_client.c:28:6: warning: variable ‘pno’ set but not used [-Wunused-but-set-variable]
+  int pno, by_rv, n;
+      ^
+Finished building: ../src/UDP_Client/udp_client.c
+ 
+Building file: ../src/TCP_IP_Web_Server/Web_Server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/TCP_IP_Web_Server/Web_Server.d" -MT"src/TCP_IP_Web_Server/Web_Server.d" -o "src/TCP_IP_Web_Server/Web_Server.o" "../src/TCP_IP_Web_Server/Web_Server.c"
+../src/TCP_IP_Web_Server/Web_Server.c: In function ‘main’:
+../src/TCP_IP_Web_Server/Web_Server.c:227:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/TCP_IP_Web_Server/Web_Server.c:14:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/TCP_IP_Web_Server/Web_Server.c:188:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+Finished building: ../src/TCP_IP_Web_Server/Web_Server.c
+ 
+Building file: ../src/TCP_IP_Client/Client.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/TCP_IP_Client/Client.d" -MT"src/TCP_IP_Client/Client.d" -o "src/TCP_IP_Client/Client.o" "../src/TCP_IP_Client/Client.c"
+../src/TCP_IP_Client/Client.c: In function ‘sendreq’:
+../src/TCP_IP_Client/Client.c:29:19: warning: unused variable ‘sz’ [-Wunused-variable]
+  int n, by_rv, i, sz;
+                   ^
+../src/TCP_IP_Client/Client.c:29:16: warning: unused variable ‘i’ [-Wunused-variable]
+  int n, by_rv, i, sz;
+                ^
+../src/TCP_IP_Client/Client.c: In function ‘main’:
+../src/TCP_IP_Client/Client.c:100:2: warning: implicit declaration of function ‘inet_addr’ [-Wimplicit-function-declaration]
+  s_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  ^
+../src/TCP_IP_Client/Client.c:65:14: warning: variable ‘pno’ set but not used [-Wunused-but-set-variable]
+  int sockfd, pno;
+              ^
+Finished building: ../src/TCP_IP_Client/Client.c
+ 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+21:23:21 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+21:23:23 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+21:23:52 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+21:23:55 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+21:24:10 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+21:24:15 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+21:24:18 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+21:24:31 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+21:24:33 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+21:24:33 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/thread_server.d" -MT"src/thread_server.d" -o "src/thread_server.o" "../src/thread_server.c"
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:192:55: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+   w = pthread_create(&threads[i], NULL, conn_handler, (void *)i);
+                                                       ^
+../src/thread_server.c: In function ‘conn_handler’:
+../src/thread_server.c:194:2: error: parameter name omitted
+  void *conn_handler(void *)
+  ^
+../src/thread_server.c:200:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/thread_server.c:216:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+src/subdir.mk:18: recipe for target 'src/thread_server.o' failed
+   if(h.method!="GET")
+              ^
+../src/thread_server.c: In function ‘main’:
+../src/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/thread_server.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/thread_server.o] Error 1
+23:28:56 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building target: Web_Server
+Invoking: GCC C Linker
+gcc  -o "Web_Server"  ./src/UDP_Server/udp_server.o  ./src/UDP_Client/udp_client.o  ./src/TCP_IP_Web_Server/Web_Server.o  ./src/TCP_IP_Client/Client.o   
+./src/UDP_Client/udp_client.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/udp_client.c:22: multiple definition of `error'
+makefile:34: recipe for target 'Web_Server' failed
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/UDP_Client/udp_client.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/udp_client.c:27: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:33: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:181: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/TCP_IP_Client/Client.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Client/Client.c:19: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/TCP_IP_Client/Client.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Client/Client.c:64: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [Web_Server] Error 1
+23:28:58 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/UDP_Client/test.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/UDP_Client/test.d" -MT"src/UDP_Client/test.d" -o "src/UDP_Client/test.o" "../src/UDP_Client/test.c"
+../src/UDP_Client/test.c: In function ‘main’:
+../src/UDP_Client/test.c:60:5: warning: implicit declaration of function ‘inet_addr’ [-Wimplicit-function-declaration]
+     s_addr.sin_addr.s_addr = inet_addr(argv[1]);
+     ^
+../src/UDP_Client/test.c:29:11: warning: unused variable ‘by_rv’ [-Wunused-variable]
+  int pno, by_rv, n;
+           ^
+../src/UDP_Client/test.c:29:6: warning: variable ‘pno’ set but not used [-Wunused-but-set-variable]
+  int pno, by_rv, n;
+      ^
+Finished building: ../src/UDP_Client/test.c
+ 
+Building file: ../src/Thread_Server/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Thread_Server/thread_server.d" -MT"src/Thread_Server/thread_server.d" -o "src/Thread_Server/thread_server.o" "../src/Thread_Server/thread_server.c"
+../src/Thread_Server/thread_server.c: In function ‘handle’:
+../src/Thread_Server/thread_server.c:196:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/Thread_Server/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/Thread_Server/thread_server.c: In function ‘conn_handler’:
+../src/Thread_Server/thread_server.c:218:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   if(h.method!="GET")
+              ^
+../src/Thread_Server/thread_server.c: In function ‘main’:
+../src/Thread_Server/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/Thread_Server/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/Thread_Server/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/Thread_Server/thread_server.c:162:14: warning: unused variable ‘newsockfd’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+              ^
+Finished building: ../src/Thread_Server/thread_server.c
+ 
+Building target: Web_Server
+Invoking: GCC C Linker
+gcc  -o "Web_Server"  ./src/UDP_Server/udp_server.o  ./src/UDP_Client/test.o ./src/UDP_Client/udp_client.o  ./src/Thread_Server/thread_server.o  ./src/TCP_IP_Web_Server/Web_Server.o  ./src/TCP_IP_Client/Client.o   
+./src/UDP_Client/test.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/test.c:23: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+makefile:34: recipe for target 'Web_Server' failed
+./src/UDP_Client/test.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/test.c:28: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/UDP_Client/udp_client.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/udp_client.c:22: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/UDP_Client/udp_client.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/udp_client.c:27: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/Thread_Server/thread_server.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:33: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/Thread_Server/thread_server.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:161: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:33: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `parseheader':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:41: multiple definition of `parseheader'
+./src/Thread_Server/thread_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:38: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `badrequest':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:71: multiple definition of `badrequest'
+./src/Thread_Server/thread_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:63: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `httpresponse':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:89: multiple definition of `httpresponse'
+./src/Thread_Server/thread_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:79: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:181: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/TCP_IP_Client/Client.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Client/Client.c:19: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/TCP_IP_Client/Client.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Client/Client.c:64: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [Web_Server] Error 1
+23:48:02 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building file: ../src/UDP_Client/udp_client.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/UDP_Client/udp_client.d" -MT"src/UDP_Client/udp_client.d" -o "src/UDP_Client/udp_client.o" "../src/UDP_Client/udp_client.c"
+../src/UDP_Client/udp_client.c: In function ‘main’:
+../src/UDP_Client/udp_client.c:59:5: warning: implicit declaration of function ‘inet_addr’ [-Wimplicit-function-declaration]
+     s_addr.sin_addr.s_addr = inet_addr(argv[1]);
+     ^
+../src/UDP_Client/udp_client.c:28:11: warning: unused variable ‘by_rv’ [-Wunused-variable]
+  int pno, by_rv, n;
+           ^
+../src/UDP_Client/udp_client.c:28:6: warning: variable ‘pno’ set but not used [-Wunused-but-set-variable]
+  int pno, by_rv, n;
+      ^
+Finished building: ../src/UDP_Client/udp_client.c
+ 
+Building file: ../src/Thread_Server/thread_server.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Thread_Server/thread_server.d" -MT"src/Thread_Server/thread_server.d" -o "src/Thread_Server/thread_server.o" "../src/Thread_Server/thread_server.c"
+../src/Thread_Server/thread_server.c: In function ‘handle’:
+../src/Thread_Server/thread_server.c:196:58: warning: pointer targets in passing argument 3 of ‘accept’ differ in signedness [-Wpointer-sign]
+   newsockfd = accept(sockfd,(struct sockaddr *) &c_addr, &clen);
+                                                          ^
+In file included from ../src/Thread_Server/thread_server.c:15:0:
+/usr/include/x86_64-linux-gnu/sys/socket.h:243:12: note: expected ‘socklen_t * __restrict__’ but argument is of type ‘int *’
+ extern int accept (int __fd, __SOCKADDR_ARG __addr,
+            ^
+../src/Thread_Server/thread_server.c: In function ‘conn_handler’:
+../src/Thread_Server/thread_server.c:220:14: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   if(h.method!="GET")
+              ^
+../src/Thread_Server/thread_server.c: In function ‘main’:
+../src/Thread_Server/thread_server.c:167:8: warning: unused variable ‘fp’ [-Wunused-variable]
+  FILE *fp;
+        ^
+../src/Thread_Server/thread_server.c:166:6: warning: variable ‘w’ set but not used [-Wunused-but-set-variable]
+  int w;
+      ^
+../src/Thread_Server/thread_server.c:162:67: warning: unused variable ‘new_sock’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+                                                                   ^
+../src/Thread_Server/thread_server.c:162:14: warning: unused variable ‘newsockfd’ [-Wunused-variable]
+  int sockfd, newsockfd, pno, clen, n, keep_alive=1,flag_r_value, *new_sock, i;
+              ^
+Finished building: ../src/Thread_Server/thread_server.c
+ 
+Building target: Web_Server
+Invoking: GCC C Linker
+gcc  -o "Web_Server"  ./src/UDP_Server/udp_server.o  ./src/UDP_Client/test.o ./src/UDP_Client/udp_client.o  ./src/Thread_Server/thread_server.o  ./src/TCP_IP_Web_Server/Web_Server.o  ./src/TCP_IP_Client/Client.o   
+./src/UDP_Client/test.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/test.c:23: multiple definition of `error'
+makefile:34: recipe for target 'Web_Server' failed
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/UDP_Client/test.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/test.c:28: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/UDP_Client/udp_client.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/udp_client.c:22: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/UDP_Client/udp_client.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Client/udp_client.c:27: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/Thread_Server/thread_server.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:33: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/Thread_Server/thread_server.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:161: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:33: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `parseheader':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:41: multiple definition of `parseheader'
+./src/Thread_Server/thread_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:38: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `badrequest':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:71: multiple definition of `badrequest'
+./src/Thread_Server/thread_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:63: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `httpresponse':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:89: multiple definition of `httpresponse'
+./src/Thread_Server/thread_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/Thread_Server/thread_server.c:79: first defined here
+./src/TCP_IP_Web_Server/Web_Server.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Web_Server/Web_Server.c:181: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+./src/TCP_IP_Client/Client.o: In function `error':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Client/Client.c:19: multiple definition of `error'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:27: first defined here
+./src/TCP_IP_Client/Client.o: In function `main':
+/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/TCP_IP_Client/Client.c:64: multiple definition of `main'
+./src/UDP_Server/udp_server.o:/media/thanos/Local Disk/CourseWork/Computer Networks/Assignments/WebServer/Web_Server/Debug/../src/UDP_Server/udp_server.c:45: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [Web_Server] Error 1
+19:58:41 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building target: Web_Server
+Invoking: GCC C Linker
+gcc  -o "Web_Server"  ./src/TCP_IP_Client/Client.o   
+Finished building target: Web_Server
+ 

@@ -1,0 +1,10 @@
+19:58:41 **** Incremental Build of configuration Debug for project Web_Server ****
+make all 
+Building target: Web_Server
+Invoking: GCC C Linker
+gcc  -o "Web_Server"  ./src/TCP_IP_Client/Client.o   
+Finished building target: Web_Server
+ 
+
+19:58:42 Build Finished (took 200ms)
+

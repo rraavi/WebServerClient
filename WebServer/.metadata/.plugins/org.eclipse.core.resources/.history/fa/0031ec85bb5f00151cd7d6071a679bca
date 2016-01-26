@@ -1,0 +1,197 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#define MAXSIZE 2000
+
+/*struct httpresponse
+{
+	char type[MAXSIZE];
+	char version[MAXSIZE];
+	char status[MAXSIZE];
+}r;*/
+char *filename;
+struct headerinfo
+{
+	char method[MAXSIZE];
+	char uri[MAXSIZE];
+	char version[MAXSIZE];
+}h;
+
+void error(char *msg)
+{
+	perror(msg);
+}
+
+size_t  get_flength(int fd)
+{
+	size_t  len;
+    lseek(fd, 0, SEEK_SET);                         //set at the beginning of your file
+    len = lseek(fd, 0, SEEK_END);   //lseek() returns number of byte measured
+    lseek(fd, 0, SEEK_SET);                 //set again at the beginning of the file
+    return len;
+}
+/*
+int httpresponse(char *filename, int recv_len)
+{
+	FILE *fp;
+	char buffer[1000]={0};
+	int sz;
+	int n;
+	char line1[MAXSIZE] = {0};
+	char line2[MAXSIZE] = {0};
+	char line3[MAXSIZE] = {0};
+	char line4[MAXSIZE] = {0};
+	char line5[MAXSIZE] = {0};
+	char line6[MAXSIZE] = {0};
+	char line7[MAXSIZE] = {0};
+	char finalline[MAXSIZE] = {0};
+	filename = h.uri+1;
+	fp = fopen(filename,"r");
+	fseek(fp, 0L, SEEK_END);
+	sz = ftell(fp);
+	fseek(fp, 0L, SEEK_SET);
+	fread(buffer, 1, sz, fp);
+	if(fp!=NULL)
+	{
+		strcat(line1, "HTTP/1.1 200 OK\n");
+		strcat(line2, "Content-Type: text/html; charset=utf-8\n");
+		strcat(line3, "Connection: keep-alive\n");
+		strcat(line4, "Content-Length:");
+		sprintf(line5,"%d", sz);
+		strcat(line6,"\n\n");
+		strcat(line7, buffer);
+		strcat(finalline, line1);
+		strcat(finalline, line2);
+		strcat(finalline, line3);
+		strcat(finalline, line4);
+		strcat(finalline, line5);
+		strcat(finalline, line6);
+		strcat(finalline, line7);
+		n = sendto(recv_len, finalline, strlen(finalline), 0);
+		if(n<0)
+			perror("ERROR WRITING TO THE SOCKET");
+	}
+	else
+	{
+		strcat(line1, "HTTP/1.0 404 Not Found\n");
+		strcat(line2, "Content-Type: text/html; charset=utf-8\n Connection: close\n Content-Length: 1000 \n");
+		strcat(line3, "<html><title>FileNotFound</title>\n <body>\n 404, FileNotFound \n </body>\n </html>\n\n");
+		strcat(finalline, line1);
+		strcat(finalline, line2);
+		strcat(finalline, line3);
+		n = sendto(recv_len, finalline, strlen(finalline), 0);
+		if(n<0)
+			perror("ERROR WRITING TO THE SOCKET");
+	}
+	return 0;
+}
+*/
+
+int main(int argc, char *argv[])
+{
+	int sockfd, recv_len,fd , pno, n, clen;
+	char buffer[MAXSIZE]={0};
+	char buffer1[MAXSIZE]={0};
+	/*
+	 * structure is defined in <netinet/in.h>
+	 */
+	struct sockaddr_in s_addr, c_addr;
+	struct hostent *host_src;
+	size_t file_len,sztosnd;
+	/*
+	 * check command line arguments
+	 */
+	if(argc<2)
+	{
+		perror("NO PORT ADDRESS GIVEN");
+		exit(0);
+	}
+	/*
+	 * create parent socket
+	 */
+	sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+	/*
+	 * error checking for Socket
+	 */
+	if(sockfd<0)
+	{
+		perror("ERROR OPENING SOCKET");
+		exit(0);
+	}
+	/*
+	 * server's internet address
+	 */
+	bzero((char*)&s_addr,sizeof(s_addr));
+	pno = atoi(argv[1]);
+	s_addr.sin_family = AF_INET;
+	s_addr.sin_port = htons(pno);
+	s_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	/*
+	 * binding the socket to a port
+	 */
+	if(bind(sockfd,(struct sockaddr *) &s_addr, sizeof(s_addr))<0)
+	{
+		perror("ERROR ON BINDING");
+		exit(0);
+	}
+	/*
+	 * clen is used to store the sizeof client's address
+	 */
+	clen = sizeof(c_addr);
+	/*
+	 * receive UDP datagram from the client
+	 */
+	recv_len = recvfrom(sockfd, buffer, strlen(buffer), 0,(struct sockaddr *) &c_addr, &clen);
+	if(recv_len<0)
+	{
+		error("ERROR ON ACCEPTING");
+		exit(0);
+	}
+	printf("CONNECTED WITH %s at %d PORT\n", inet_ntoa(c_addr.sin_addr), htons(c_addr.sin_port));
+	bzero(buffer,2000);
+    if ( (fd = open(filename, O_RDONLY)) < 0)
+    {
+    	error("FILE NOT FOUND");
+    	exit(0);
+    }
+    file_len = get_flength(fd);
+    if((sendto(sockfd, &file_len, sizeof(file_len), 0, (struct sockaddr*)&c_addr, clen)) < 0 )
+    {
+      error("CANNOT SEND FILE LENGTH\n");
+      exit(0);
+    }
+    printf("FILE LENGTH SENT");
+    read(fd, buffer1, sizeof(buffer1));
+    if((sztosnd = sendto(sockfd, buffer1, strlen(buffer1), 0, (struct sockaddr*)&c_addr, clen)) <0 )
+    {
+    	error("CANNOT SEND FILE\n");
+    	exit(0);
+    }
+    puts("FILE SENT");
+    return 0;
+	/*	printf("received bytes is %d", recv_len);
+		if(recv_len>0)
+		{
+			buffer[recv_len]=0;
+			printf("%s\n",buffer);
+		}
+		/*
+		 * to determine who sent the datagram
+
+		host_src = gethostbyaddr((const char *)&c_addr.sin_addr.s_addr,sizeof(c_addr.sin_addr.s_addr), AF_INET);
+		if(host_src==NULL)
+			error("error with gethostbyaddr");
+		/*
+		 * sendto the input back to the client
+
+		n = sendto(sockfd, buffer, strlen(buffer), 0,(struct sockaddr *) &c_addr, clen);
+		if (n<0)
+			error("ERROR in sendto");*/
+}

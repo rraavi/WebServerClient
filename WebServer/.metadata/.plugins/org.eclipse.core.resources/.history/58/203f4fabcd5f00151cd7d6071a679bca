@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+
+void error(char *msg)
+{
+	perror(msg);
+}
+
+int main(int argc, char **argv)
+{
+	int portno;
+	int client_socket;
+	struct sockaddr_in server;
+	socklen_t addrsize = sizeof(struct sockaddr);
+	char read_buffer[2000];
+	char *filename;
+	size_t size_to_read = 0;
+	size_t size_read =0;
+	portno = atoi(argv[1]);
+
+	if(argc<4)
+	{
+		error("Usage: <%s><Address><portno><FILE name>\n", argv[0]);
+	    exit(0);
+	}
+
+	if ((client_socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+	{
+		error("ERROR IN SOCKET\n");
+		exit(0);
+	}
+    server.sin_family = AF_INET;
+    server.sin_port = htons(atoi(argv[2]));
+    server.sin_addr.s_addr = inet_addr(argv[1]);
+    filename = argv[3];
+    if((sendto(client_socket, filename, strlen(filename), 0, (struct sockaddr*)&server, addrsize))<0)
+    {
+    	error("ERROR IN SENDING\n");
+	    exit(0);
+	}
+	if((recvfrom(client_socket, (size_t*)&size_to_read, sizeof(size_to_read), 0, (struct sockaddr*)&server, &addrsize))<0)
+	{
+		error("ERROR IN RECEIVING");
+	    exit(0);
+	}
+	printf("Size of file: %lu\n", size_to_read);
+	if (size_to_read < 0)
+	 {
+		error("ERROR TO READ < 0\n");
+		exit(0);
+	 }
+	 if((size_read = recvfrom(client_socket, read_buffer, sizeof(read_buffer), 0, (struct sockaddr*)&server, &addrsize))<0)
+	 {
+		 error("ERROR WHILE RECEIVING");
+	     exit(0);
+	 }
+     printf("%s", read_buffer);
+     close(client_socket);
+     return 0;
+}

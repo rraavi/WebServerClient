@@ -1,0 +1,93 @@
+/*
+ * Client.c
+ *
+ *  Created on: Sep 18, 2015
+ *      Author: thanos
+ */
+
+
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+
+void error(char *msg)
+{
+	perror(msg);
+}
+
+int main(int argc, char *argv[])
+{
+
+	int sockfd, pno, n, by_rv, i, sz;
+	char filename[100], filename1[100], conntype[100];
+	struct sockaddr_in s_addr;
+	char buffer[2000], buffer1[2000], buf[2000];
+	FILE *fp;
+	if (argc < 5)
+	{
+		fprintf(stderr,"enter %s Hostaddr Portno Filename Connection-Type\n",argv[0]);
+	}
+	pno = atoi(argv[2]);
+	strcpy(filename,argv[3]);
+	puts(filename);
+	strcpy(conntype,argv[4]);
+	puts(conntype);
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	if(sockfd<0)
+	{
+		error("ERROR WHILE OPENING SOCKET");
+	}
+//server = gethostbyaddr(argv[1]);
+
+/*if(sizeof(s_addr.sin_addr.s_addr)==0)
+{
+fprintf(stderr,"ERROR: THERE'S NO SUCH ADDRESS \n");
+}*/
+	bzero((char *) &s_addr, sizeof(s_addr));
+	s_addr.sin_family = AF_INET;
+	//bcopy((char *)server->h_addr, (char *)&s_addr.sin_addr.s_addr, server->h_length);
+	s_addr.sin_port = htons(atoi(argv[2]));
+	s_addr.sin_addr.s_addr = inet_addr(argv[1]);
+	if(connect(sockfd,(struct sockaddr *)&s_addr, sizeof(s_addr))<0)
+	{
+		error("ERROR WHILE CONNECTING");
+	}
+	bzero(buffer,2000);
+	bzero(buffer1,2000);
+
+
+	/*fp=fopen(filename,"r");
+	fseek(fp, 0L, SEEK_END);
+	sz = ftell(fp);
+	fseek(fp, 0L, SEEK_SET);
+	fread(buf, 1, sz, fp);
+	puts(buffer1);*/
+
+	while (fgets(buffer1, 2000, fp)!= NULL )
+	{
+		fputs(buffer1, stdout);
+	}
+	fclose(fp);
+	printf("Enter the filename:");
+	scanf("%s", filename1);
+	printf("Sending the details to the server, they are: %s %s", filename1, conntype);
+	sprintf(buffer,"GET /%s HTTP/1.1\r\nHost: \r\nConnection: %s\r\n\r\n", filename1, conntype);
+	n = send(sockfd, buffer, strlen(buffer),0);
+	if(n<0)
+	{
+		error("ERROR READING FROM THE SOCKET");
+	}
+	while((by_rv = read(sockfd, buffer1, 2000)) > 0)
+	{
+		printf("\nBytes received %d\n",by_rv);
+	    for(i=0; i< by_rv; i++)
+	    {
+	    	printf("%c", buffer1[i]);
+	    }
+	}
+	close(sockfd);
+	return 0;
+}

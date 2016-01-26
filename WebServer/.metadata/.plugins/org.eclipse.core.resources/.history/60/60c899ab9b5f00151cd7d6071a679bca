@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+
+void error(char *msg)
+{
+	perror(msg);
+}
+
+/*void sendreq(char *filename, char *conntype, int sockfd)
+{
+	int n, by_rv, i, sz;
+	char buffer_s[2000], buffer_r[2000];
+	bzero(buffer_s,2000);
+	bzero(buffer_r,2000);
+	printf("Sending the details to the server, they are: %s %s\n", filename, conntype);
+	sprintf(buffer_s,"GET /%s HTTP/1.1\r\nHost: \r\nConnection: %s\r\n\r\n", filename, conntype);
+	n = send(sockfd, buffer_s, strlen(buffer_s),0);
+	printf("Details sent\n");
+	if(n<0)
+	{
+		error("ERROR READING FROM THE SOCKET");
+		exit(0);
+	}
+}
+*/
+
+int main(int argc, char *argv[])
+{
+	int sockfd, pno, n, by_rv;
+	char buf[2000], sndlne[1000], rcvlne[1000];
+	char filename[2000];
+	struct sockaddr_in s_addr;
+	FILE *fp;
+	if (argc < 4)
+	{
+		fprintf(stderr,"enter %s Hostaddr Portno Filename\n",argv[0]);
+	}
+	pno = atoi(argv[2]);
+	strcpy(filename,argv[3]);
+	puts(filename);
+	sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+	if(sockfd<0)
+	{
+		error("ERROR WHILE OPENING SOCKET");
+		exit(0);
+	}
+   bzero(&s_addr,sizeof(s_addr));
+   s_addr.sin_family = AF_INET;
+   s_addr.sin_addr.s_addr=inet_addr(argv[1]);
+   s_addr.sin_port=htons(32000);
+
+	if(connect(sockfd,(struct sockaddr *)&s_addr, sizeof(s_addr))<0)
+	{
+		error("ERROR WHILE CONNECTING");
+		exit(0);
+	}
+	bzero(buf,2000);
+	fp=fopen(filename,"r");
+	if(fp==NULL)
+		printf("File not found on the server side/n");
+	else
+	{
+		while (fgets(sndlne, 10000,stdin) != NULL)
+		{
+			n=sendto(sockfd,sndlne,strlen(sndlne),0,(struct sockaddr *)&s_addr,sizeof(s_addr));
+			if(n<0)
+			{
+				error("ERROR WHILE SENDING TO THE SOCKET");
+				exit(0);
+			}
+			n=recvfrom(sockfd,rcvlne,10000,0,NULL,NULL);
+			if(n<0)
+			{
+				error("ERROR WHILE RECEIVING FROM THE SOCKET");
+				exit(0);
+			}
+			rcvlne[n]=0;
+			fputs(rcvlne,stdout);
+			by_rv = read(sockfd, rcvlne, 2000);
+			printf("\nBytes received %d\n",by_rv);
+			printf("%s", rcvlne);
+		}
+   }
+}
